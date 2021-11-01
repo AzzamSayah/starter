@@ -69,6 +69,14 @@ Route::get('index', 'Front\UserController@getIndex');
 // return view('landing');
 // });
 
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('redirect/{service}', 'SocialController@redirect');
+Route::get('callback/{service}', 'SocialController@callback');
