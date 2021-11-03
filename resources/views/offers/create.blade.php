@@ -66,55 +66,46 @@
         </style>
     </head>
     <body>
-        {{-- 2 --}}
-<h1>{{__('messages.welcome')}}</h1>
-
-{{-- @if ($obj -> name == "azzam")
-    <h1> yes i am azzam sayah </h1>
-    @else 
-    <h1> No i am not azzam sayah </h1>
-@endif --}}
-
-{{-- 
- @foreach ($data as $_data )
-    <p>{{$_data}}</p>
-@endforeach  --}}
-{{-- 
-@forelse ($data2 as $_data2 )
-    <p>{{$_data2}}</p>
-    @empty
-    <p>No Data</p>
-@endforelse --}}
+ 
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
+           <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                Add your offer
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                @if (Session::has('success'))
+                  <div class="alert alert-success" role="alert">
+                      {{Session::get('success')}}  
+                  </div>
+                @endif
+<form  method="POST" action="{{route('offers-store')}}">
+    @csrf
+  <div class="col-auto">
+    <label for="staticEmail2" class="visually-hidden">offer name</label>
+    <input type="text"  class="form-control" name="name" placeholder="name">
+    @error('name')
+     <small class="form-text text-danger">{{$message }}</small>   
+    @enderror
+    
+  </div>
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">price</label>
+    <input type="text" class="form-control" name = "price" placeholder="price">
+       @error('price')
+     <small class="form-text text-danger">{{$message}}</small>   
+    @enderror
+  </div>
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">details</label>
+    <input type="text" class="form-control" name = "details" placeholder="details">
+      @error('details')
+     <small class="form-text text-danger">{{$message}}</small>   
+    @enderror
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary mb-3">Save Offer</button>
+  </div>
+</form>
+               
             </div>
         </div>
 
