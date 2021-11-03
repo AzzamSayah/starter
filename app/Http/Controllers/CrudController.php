@@ -44,18 +44,19 @@ $messages = $this-> getMessages();
      ]);
 
      return redirect() -> back() -> with(
-       ['success' => 'تم إضافة البيانات بنجاح']);
+       ['success' => __('messages.dataSavedSuccess')]);
 
      
  }
 
 protected function getMessages(){
   return  [
-        'name.required' => 'إسم العرض مطلوب',
-        'name.unique' => 'إسم العرض موجود',
-        'price.numeric' => 'سعر العرض يجب ان يكون أرقام',
-        'price.required' => 'سعر العرض مطلوب',
-        'details.required' => 'وصف العرض مطلوب'
+        'name.required' => __('messages.offerNameRequired'),
+        'name.unique' => __('messages.offerNameUnique'),
+        'price.numeric' => __('messages.priceNumeric'),
+        'price.required' =>__('messages.priceRequired'),
+        'details.required' =>__('messages.offerDetailsRequired')
+        
       ];
 }
 

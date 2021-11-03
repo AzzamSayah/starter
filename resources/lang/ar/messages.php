@@ -13,5 +13,17 @@ return [
     |
     */
     'welcome' => 'أهلا بكم',
-
+    'offerNameRequired' => 'إسم العرض مطلوب',
+    'offerNameUnique' => 'إسم العرض موجود',
+    'priceNumeric'=> 'سعر العرض يجب ان يكون أرقام',
+    'priceRequired'=> 'سعر العرض مطلوب',
+    'offerDetailsRequired'=> 'وصف العرض مطلوب',
+    'dataSavedSuccess'=> 'تم إضافة البيانات بنجاح',
+    'selectLanguage' => 'إختر لغة',
+    'AddYourOffer' => 'أضف عرضك',
+    'offerName'=> 'إسم العرض',
+    'offerPrice' => 'سعر العرض',
+    'offerDetails'=> 'وصف العرض',
+    
+    
 ];
