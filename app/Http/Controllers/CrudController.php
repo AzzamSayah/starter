@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OfferRequest;
 use App\models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CrudController extends Controller
 {
@@ -25,22 +27,13 @@ return view('offers.create');
 
  }
 
- public function store(Request $request){
-  
-
-$rules = $this-> getRules();
-$messages = $this-> getMessages();
-
-  // validate data before insert to database
-  $validator = Validator($request->all(),$rules,$messages);
-  if($validator -> fails()){
-    return redirect()->back()->withErrors($validator)->withInput($request->all());
-  }
-
-    Offer:: create([
-         'name' => $request['name'],
-         'price' => $request['price'],
-         'details' => $request['details']
+ public function store(OfferRequest $request){
+   Offer:: create([
+         'name_ar' => $request -> name_ar,
+         'name_en' => $request -> name_en,
+         'price' => $request -> price,
+         'details_ar' => $request -> details_ar,
+         'details_en' => $request -> details_en
      ]);
 
      return redirect() -> back() -> with(
@@ -49,25 +42,10 @@ $messages = $this-> getMessages();
      
  }
 
-protected function getMessages(){
-  return  [
-        'name.required' => __('messages.offerNameRequired'),
-        'name.unique' => __('messages.offerNameUnique'),
-        'price.numeric' => __('messages.priceNumeric'),
-        'price.required' =>__('messages.priceRequired'),
-        'details.required' =>__('messages.offerDetailsRequired')
-        
-      ];
+ public function getAllOffers(){
+  $offers = Offer::select('id','name_' . LaravelLocalization::getCurrentLocale() . ' as name','price','details_' . LaravelLocalization::getCurrentLocale() . ' as details') -> get();
+return view('offers.all',compact('offers')) ;
+
 }
-
-protected function getRules(){
-  return  [
-      'name' => 'required|max:100|unique:offers,name',
-      'price' => 'required|numeric',
-      'details' => 'required'
-  ];
-}
-
-
 
 }

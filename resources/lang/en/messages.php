@@ -22,9 +22,12 @@ return [
     'dataSavedSuccess' => 'data saved successfully',
     'selectLanguage' => 'Select Language',
     'AddYourOffer' => 'Add Your Offer',
-    'offerName' => 'Offer Name',
+    'offerName_ar' => 'Offer Name in Arabic',
+    'offerName_en' => 'Offer Name in English',
     'offerPrice' => 'Offer Price',
-    'offerDetails' => 'Offer Details',
+    'offerDetails_ar' => 'Offer Details in Arabic',
+    'offerDetails_en' => 'Offer Details in English',
+    'SaveOffer' => 'Save Offer',
     
     
 

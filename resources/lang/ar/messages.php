@@ -21,9 +21,12 @@ return [
     'dataSavedSuccess'=> 'تم إضافة البيانات بنجاح',
     'selectLanguage' => 'إختر لغة',
     'AddYourOffer' => 'أضف عرضك',
-    'offerName'=> 'إسم العرض',
+    'offerName_ar'=> 'إسم العرض بالعربي',
+    'offerName_en'=> 'إسم العرض بالإنجليزي',
     'offerPrice' => 'سعر العرض',
-    'offerDetails'=> 'وصف العرض',
+    'offerDetails_ar'=> 'وصف العرض بالعربي',
+    'offerDetails_en'=> 'وصف العرض بالإنجليزي',
+    'SaveOffer' => 'حفظ العرض',
     
     
 ];
