@@ -28,7 +28,11 @@ return [
     'offerDetails_ar' => 'Offer Details in Arabic',
     'offerDetails_en' => 'Offer Details in English',
     'SaveOffer' => 'Save Offer',
-    
+    'operation' => 'operation',
+    'update' => 'update',
+    'updateYourOffer' => 'update Your Offer',
+    'updateSuccessfully' => 'Data Updated Successfully',
+
     
 
 ];

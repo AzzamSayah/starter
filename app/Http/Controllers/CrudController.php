@@ -48,4 +48,43 @@ return view('offers.all',compact('offers')) ;
 
 }
 
+public function editOffer($offer_id){
+//Offer:: findOrFail($offer_id);
+//$offer = Offer::find($offer_id);//search in given table id primary key only
+
+$offer = Offer::select('id','name_ar','name_en','details_ar','details_en','price') -> find($offer_id);
+
+    if (!$offer) {
+      return redirect()->back();
+    }
+    return view('offers.edit',compact('offer'));
+
+}
+
+public function updateOffer(OfferRequest $request,$offer_id){
+    // vaidation in external file
+    // check if exist
+    $offer = Offer::find($offer_id);
+    if (!$offer) {
+      return redirect()->back();
+    }
+
+//update data
+
+// first method
+
+/*$offer -> update([
+  'name_ar' =>$request -> name_ar,
+  
+]);
+*/
+
+
+
+
+//second method
+$offer -> update($request -> all());
+return redirect() -> back() -> with(['success' => __('messages.updateSuccessfully')]);
+}
+
 }

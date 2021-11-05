@@ -67,7 +67,7 @@
     </head>
     <body>
  
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,35 +99,79 @@
     </div>
   </div>
 </nav>
-<table class="table"> 
-<thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">{{__('messages.offerName_' .
-         LaravelLocalization::getCurrentLocale())}}</th>
-        <th scope="col">{{__('messages.offerPrice')}}</th>
-        <th scope="col">{{__('messages.offerDetails_'. 
-        LaravelLocalization::getCurrentLocale())}}</th>
-        <th scope="col">{{__('messages.operation')}} </th>
-        
-      
-    </tr>
-</thead>
-<tbody>
-    @foreach ($offers as $offer )
-        
- 
-    <tr>
-        <th scope="row">{{$offer -> id}}</th>
-        <td>{{$offer -> name}}</td>
-        <td>{{$offer -> price}}</td>
-        <td>{{$offer -> details}}</td>
-        <td><a  href={{url('offers/edit/'.$offer -> id)}} class="btn btn-success">{{__('messages.update')}}</button></td>
-       
-    </tr>
-     @endforeach
-</tbody>
-</table>
+
+
+        <div class="flex-center position-ref full-height">
+           <div class="content">
+                <div class="title m-b-md">
+                {{__('messages.updateYourOffer')}}
+                </div>
+                @if (Session::has('success'))
+                  <div class="alert alert-success" role="alert">
+                      {{Session::get('success')}}  
+                  </div>
+                @endif
+<form  method="POST" action="{{route('offers.update',$offer -> id)}}">
+    @csrf
+  <div class="col-auto">
+    <label for="staticEmail2" class="visually-hidden">offer name</label>
+    <input type="text"  class="form-control" name="name_ar" placeholder=
+    "{{__('messages.offerName_ar')}}" value ="{{$offer -> name_ar}}">
+    @error('name_ar')
+     <small class="form-text text-danger">{{$message }}</small>   
+    @enderror
+    
+  </div>
+
+<div class="col-auto">
+    <label for="staticEmail2" class="visually-hidden">offer name</label>
+    <input type="text"  class="form-control" name="name_en" placeholder=
+    "{{__('messages.offerName_en')}}" value ="{{$offer -> name_en}}">
+    @error('name_en')
+     <small class="form-text text-danger">{{$message }}</small>   
+    @enderror
+    
+  </div>
+
+
+
+
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">price</label>
+    <input type="text" class="form-control" name = "price" placeholder =
+    "{{__('messages.offerPrice')}}" value ="{{$offer -> price}}">
+       @error('price')
+     <small class="form-text text-danger">{{$message}}</small>   
+    @enderror
+  </div>
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">details</label>
+    <input type="text" class="form-control" name = "details_ar" placeholder = "{{__('messages.offerDetails_ar')}}" value ="{{$offer -> details_ar}}">
+      @error('details_ar')
+     <small class="form-text text-danger">{{$message}}</small>   
+    @enderror
+  </div>
+
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">details</label>
+    <input type="text" class="form-control" name = "details_en" placeholder = "{{__('messages.offerDetails_en')}}" value ="{{$offer -> name_en}}">
+      @error('details_en')
+     <small class="form-text text-danger">{{$message}}</small>   
+    @enderror
+  </div>
+
+<br>
+
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary mb-3">{{__('messages.update')}}</button>
+  </div>
+</form>
+               
+            </div>
+        </div>
+
+                    
+
 
     </body>
 </html>

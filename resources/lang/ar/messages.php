@@ -27,6 +27,11 @@ return [
     'offerDetails_ar'=> 'وصف العرض بالعربي',
     'offerDetails_en'=> 'وصف العرض بالإنجليزي',
     'SaveOffer' => 'حفظ العرض',
+    'operation' =>'العمليات',
+    'update' => 'تحديث',
+    'updateYourOffer'  => "تحديث عرضك",
+    'updateSuccessfully' => 'تم تحديث البيانات بنجاح',
+
     
     
 ];
