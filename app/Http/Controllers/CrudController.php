@@ -7,9 +7,11 @@ use App\models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Traits\OfferTrait;
 
 class CrudController extends Controller
 {
+    use OfferTrait;
     public function  getOffers()
 {
   return Offer::select('id','name') -> get();
@@ -28,12 +30,20 @@ return view('offers.create');
  }
 
  public function store(OfferRequest $request){
+
+//save photo in folder
+
+$file_name = $this-> saveImage($request -> photo,'images/offers');
+
+
+
    Offer:: create([
          'name_ar' => $request -> name_ar,
          'name_en' => $request -> name_en,
          'price' => $request -> price,
          'details_ar' => $request -> details_ar,
-         'details_en' => $request -> details_en
+         'details_en' => $request -> details_en,
+         'photo' => $file_name,
      ]);
 
      return redirect() -> back() -> with(
@@ -79,12 +89,11 @@ public function updateOffer(OfferRequest $request,$offer_id){
 ]);
 */
 
-
-
-
 //second method
 $offer -> update($request -> all());
 return redirect() -> back() -> with(['success' => __('messages.updateSuccessfully')]);
 }
+
+
 
 }

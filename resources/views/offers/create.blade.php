@@ -64,6 +64,7 @@
                 margin-bottom: 30px;
             }
         </style>
+
     </head>
     <body>
  
@@ -111,8 +112,19 @@
                       {{Session::get('success')}}  
                   </div>
                 @endif
-<form  method="POST" action="{{route('offers-store')}}">
+<form  method="POST" action="{{route('offers-store')}}" enctype ="multipart/form-data">
     @csrf
+
+<div class="col-auto">
+    <label >{{__('messages.selectImage')}}</label>
+    <input type="file" value = {{__('messages.selectImage')}} class="form-control" name="photo" id ="choose-file">
+    @error('photo')
+     <small class="form-text text-danger">{{$message }}</small>   
+    @enderror
+    
+  </div>
+
+
   <div class="col-auto">
     <label for="staticEmail2" class="visually-hidden">offer name</label>
     <input type="text"  class="form-control" name="name_ar" placeholder=
@@ -171,7 +183,20 @@
         </div>
 
                     
+ <script src ="{{url('\JQuery\jquery-3.6.0.min.js')}}"></script>
+       <script>
+        $('#choose-file').inputFileText({
+    text: 'Select File'
+});
 
+ $(document).ready(function(){
+      
+        $("body").css("background-color","yellow");
+     
+     
+    });
+ 
 
+        </script>
     </body>
 </html>

@@ -32,6 +32,7 @@ return [
     'update' => 'update',
     'updateYourOffer' => 'update Your Offer',
     'updateSuccessfully' => 'Data Updated Successfully',
+    'selectImage' => 'Select an Image',
 
     
 

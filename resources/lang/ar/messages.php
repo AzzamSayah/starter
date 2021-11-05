@@ -31,6 +31,7 @@ return [
     'update' => 'تحديث',
     'updateYourOffer'  => "تحديث عرضك",
     'updateSuccessfully' => 'تم تحديث البيانات بنجاح',
+    'selectImage' => 'إختر صورة',
 
     
     
