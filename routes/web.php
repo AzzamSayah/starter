@@ -100,6 +100,7 @@ Route::group(['prefix' => 'offers'],function(){
         
     });
     
-   
+Route::get('youtube','CrudController@getVideo');   
 
 });
+

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Traits\OfferTrait;
-
+use App\models\Video;
+use App\Events\VideoViewer;
 class CrudController extends Controller
 {
     use OfferTrait;
@@ -95,5 +96,11 @@ return redirect() -> back() -> with(['success' => __('messages.updateSuccessfull
 }
 
 
+public function getVideo(){
+
+  $video = Video::first();
+  event(new VideoViewer($video)); // event fire
+  return view('video')->with('video',$video);
+}
 
 }
