@@ -32,6 +32,10 @@ return [
     'updateYourOffer'  => "تحديث عرضك",
     'updateSuccessfully' => 'تم تحديث البيانات بنجاح',
     'selectImage' => 'إختر صورة',
+    'delete' => 'حذف',
+    'offerNotFound' => 'العرض غير موجود',
+    'offerDeletedSuccessfully' => 'تم حذف العرض بنجاح',
+    
 
     
     

@@ -33,6 +33,11 @@ return [
     'updateYourOffer' => 'update Your Offer',
     'updateSuccessfully' => 'Data Updated Successfully',
     'selectImage' => 'Select an Image',
+    'delete' => 'delete',
+    'offerNotFound' => 'Offer Not Found',
+    'offerDeletedSuccessfully' => 'Offer Deleted Successfully',
+    
+
 
     
 

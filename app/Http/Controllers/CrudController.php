@@ -72,6 +72,20 @@ $offer = Offer::select('id','name_ar','name_en','details_ar','details_en','price
 
 }
 
+public function deleteOffer($offerId){
+
+  $offer = Offer::find($offerId);
+  if (!$offer) {
+    return redirect() -> back() -> with(['error' => __('messages.offerNotFound')]);
+  } else {
+   $offer -> delete();
+   return redirect() -> route('offers.all')
+                     ->with(['success' => __('messages.offerDeletedSuccessfully')]); 
+  }
+  
+
+}
+
 public function updateOffer(OfferRequest $request,$offer_id){
     // vaidation in external file
     // check if exist

@@ -99,6 +99,18 @@
     </div>
   </div>
 </nav>
+
+@if (Session:: has('success'))
+    <div class = "alert alert-success">
+        {{Session::get('success')}}
+    </div>
+@endif
+
+@if (Session:: has('error'))
+    <div class="alert alert-danger">
+        {{Session::get('error')}}
+    </div>
+@endif
 <table class="table"> 
 <thead>
     <tr>
@@ -123,6 +135,8 @@
         <td>{{$offer -> price}}</td>
         <td>{{$offer -> details}}</td>
         <td><a  href={{url('offers/edit/'.$offer -> id)}} class="btn btn-success">{{__('messages.update')}}</button></td>
+
+        <td><a  href={{url('offers/delete/'.$offer -> id)}} class="btn btn-danger">{{__('messages.delete')}}</button></td>
        
     </tr>
      @endforeach

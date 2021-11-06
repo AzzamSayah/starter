@@ -93,10 +93,12 @@ Route::group(['prefix' => 'offers'],function(){
 
         Route::get('create', 'CrudController@create');
         Route::post('store', 'CrudController@store')->name('offers-store');
-        Route::get('all', 'CrudController@getAllOffers');
+        Route::get('all', 'CrudController@getAllOffers')->name('offers.all');
 
         Route::get('edit/{offer_id}', 'CrudController@editOffer');
         Route::post('update/{offer_id}', 'CrudController@updateOffer')->name('offers.update');
+        
+        Route::get('delete/{offer_id}', 'CrudController@deleteOffer')->name('offers.delete');
         
     });
     
