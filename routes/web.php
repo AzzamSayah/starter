@@ -106,3 +106,17 @@ Route::get('youtube','CrudController@getVideo');
 
 });
 
+######################### begin ajax routes #######################
+
+Route::group(['prefix' => 'ajax-offers'],function(){
+
+    Route::get('create','OfferController@create');
+    Route::post('store', 'OfferController@store') -> name('ajax.offers.store');
+});
+
+
+
+
+
+######################### end ajax routes #######################
+
