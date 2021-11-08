@@ -35,6 +35,10 @@ return [
     'delete' => 'حذف',
     'offerNotFound' => 'العرض غير موجود',
     'offerDeletedSuccessfully' => 'تم حذف العرض بنجاح',
+    'errorSavedData' => 'فشلت عملية الحقظ',
+    'image' => 'الصورة',
+    'deleteAjax' => 'حذف أجاكس',
+    'updateAjax' => 'تحديث أجاكس',
     
 
     

@@ -36,7 +36,10 @@ return [
     'delete' => 'delete',
     'offerNotFound' => 'Offer Not Found',
     'offerDeletedSuccessfully' => 'Offer Deleted Successfully',
-    
+    'errorSavedData' => 'an error has occurd',
+    'image' => 'image',
+    'deleteAjax' => 'Delete Ajax',
+    'updateAjax' => 'update Ajax',
 
 
     

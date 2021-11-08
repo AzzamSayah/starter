@@ -12,7 +12,7 @@
                       {{Session::get('success')}}  
                   </div>
                 @endif
-<form  method="POST" action="" enctype ="multipart/form-data">
+<form  method="POST" id = "offerForm" action="" enctype ="multipart/form-data">
     @csrf
 
 <div class="col-auto">
@@ -87,18 +87,20 @@
   $('#save_offer').click(function(e){
     e.preventDefault();
     console.log('clicked');
+
+var formData = new FormData($('#offerForm')[0]);
+
+
     $.ajax({
     type:'post',
+    enctype:'multipart/form-data',
     url: "{{route('ajax.offers.store')}}",
-    data:{
-      '_token': "{{csrf_token()}}" ,
-      'name_ar' :$("input[name='name_ar']").val(),
-      'name_en' :$("input[name='name_en']").val(),
-      'price' :$("input[name='price']").val(),
-      'details_ar' :$("input[name='details_ar']").val(),
-      'details_en' :$("input[name='details_en']").val(),
-    },
+    data:formData,
+    processData : false,
+    contentType:false,
+    cache:false,
     success : function(data){
+       alert(data.msg);
 
     },
     error:function(reject){
