@@ -49,9 +49,9 @@ Route::get('/', function () {
 // })->middleware('auth');
 
 
-// Route::get('login', function () {
-//     return 'Autantication required';
-// })->name('login');
+Route::get('login', function () {
+    return 'Autantication required';
+})->name('login');
 
 
 // Route::group(['namespace' => 'Front'], function () {
@@ -102,7 +102,7 @@ Route::group(['prefix' => 'offers'],function(){
         
     });
     
-Route::get('youtube','CrudController@getVideo');   
+Route::get('youtube','CrudController@getVideo')->middleware('auth');   
 
 });
 
@@ -119,9 +119,32 @@ Route::group(['prefix' => 'ajax-offers'],function(){
         Route::post('update', 'OfferController@update')->name('ajax.offers.update');
 });
 
-
-
-
-
 ######################### end ajax routes #######################
+
+
+
+
+################## begin Authentication and guards ####################
+Route :: get('NotAdult',function(){
+    return "Not Allowed";
+}) -> name('not.Adult');
+
+Route::group(['middleware' => 'CheckAge','namespace' => 'Auth'],function(){
+
+Route:: get('Adults','CustomAuthController@Adult') -> name('adult');
+
+});
+
+Route::group(['namespace' => 'Auth'],
+    function () {
+
+Route::get('admin', 'CustomAuthController@admin')->middleware('auth:admin')->name('admin');
+
+Route::get('site', 'CustomAuthController@site')->middleware(('auth:web'))->name('site');
+
+Route::get('admin/login', 'CustomAuthController@adminLogin')->name('admin.login');
+
+Route::post('admin/login', 'CustomAuthController@checkAdminLogin')->name('save.admin.login');
+    });
+################## end Authentication and guards######################
 
