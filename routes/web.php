@@ -150,7 +150,7 @@ Route::post('admin/login', 'CustomAuthController@checkAdminLogin')->name('save.a
 
 
 
-############## begin relations routes ################
+############## begin one to one relations routes ################
 Route::get('has-one','relations\RelationsController@hasOneRelation');
 Route::get('has-one-reverse', 'relations\RelationsController@hasOneRelationReverse');
 Route::get('get-users-has-phones', 'relations\RelationsController@getUsersHasPhones');
@@ -158,4 +158,22 @@ Route::get('get-users-has-phones', 'relations\RelationsController@getUsersHasPho
 Route::get('get-users-has-phones-with-condition', 'relations\RelationsController@getUsersHasPhonesWithCondition');
 
 Route::get('get-users-not-has-phones', 'relations\RelationsController@getUsersNotHasPhones');
-############## end relations routes ################
+############## end one to one relations routes ################
+
+
+############## begin one to many relations routes ################
+
+Route::get('hospital-has-many', 'relations\RelationsController@getHospitalDoctors');
+
+Route::get('hospitals', 'relations\RelationsController@hospitals')->name('hospital.all');
+
+Route::get('doctors/{hospital_id}', 'relations\RelationsController@doctors') -> name('hospital.doctors');
+
+Route::get('doctors-delete/{hospital_id}', 'relations\RelationsController@deleteDoctors') -> name('hospital.doctors.delete');
+
+Route::get('hospitals-has-doctors', 'relations\RelationsController@hospitalsHasDoctors');
+
+Route::get('hospitals-has-doctors-male', 'relations\RelationsController@hospitalsHasDoctorsMale');
+Route::get('hospitals-not-has-doctors', 'relations\RelationsController@hospitalsNotHaveDotors');
+
+############## end one to many relations routes ################

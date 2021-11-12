@@ -7,20 +7,16 @@
                 <div class="title m-b-md">
                 {{__('messages.AddYourOffer')}}
                 </div>
-                @if (Session::has('success'))
-                  <div class="alert alert-success" role="alert">
-                      {{Session::get('success')}}  
-                  </div>
-                @endif
+              
 <form  method="POST" id = "offerForm" action="" enctype ="multipart/form-data">
     @csrf
 
 <div class="col-auto">
     <label >{{__('messages.selectImage')}}</label>
     <input type="file" value = {{__('messages.selectImage')}} class="form-control" name="photo" id ="choose-file">
-    @error('photo')
-     <small class="form-text text-danger">{{$message }}</small>   
-    @enderror
+    
+     <small id="photo_error" class="form-text text-danger"></small>   
+    
     
   </div>
 
@@ -29,9 +25,9 @@
     <label for="staticEmail2" class="visually-hidden">offer name</label>
     <input type="text"  class="form-control" name="name_ar" placeholder=
     "{{__('messages.offerName_ar')}}">
-    @error('name_ar')
-     <small class="form-text text-danger">{{$message }}</small>   
-    @enderror
+    
+     <small id="name_ar_error" class="form-text text-danger"></small>   
+    
     
   </div>
 
@@ -39,9 +35,9 @@
     <label for="staticEmail2" class="visually-hidden">offer name</label>
     <input type="text"  class="form-control" name="name_en" placeholder=
     "{{__('messages.offerName_en')}}">
-    @error('name_en')
-     <small class="form-text text-danger">{{$message }}</small>   
-    @enderror
+    
+     <small id="name_en_error" class="form-text text-danger"></small>   
+    
     
   </div>
 
@@ -52,24 +48,24 @@
     <label for="inputPassword2" class="visually-hidden">price</label>
     <input type="text" class="form-control" name = "price" placeholder =
     "{{__('messages.offerPrice')}}">
-       @error('price')
-     <small class="form-text text-danger">{{$message}}</small>   
-    @enderror
+       
+     <small id="price_error" class="form-text text-danger"></small>   
+    
   </div>
   <div class="col-auto">
     <label for="inputPassword2" class="visually-hidden">details</label>
     <input type="text" class="form-control" name = "details_ar" placeholder = "{{__('messages.offerDetails_ar')}}">
-      @error('details_ar')
-     <small class="form-text text-danger">{{$message}}</small>   
-    @enderror
+      
+     <small id="details_ar_error" class="form-text text-danger"></small>   
+    
   </div>
 
   <div class="col-auto">
     <label for="inputPassword2" class="visually-hidden">details</label>
     <input type="text" class="form-control" name = "details_en" placeholder = "{{__('messages.offerDetails_en')}}">
-      @error('details_en')
-     <small class="form-text text-danger">{{$message}}</small>   
-    @enderror
+      
+     <small id="details_en_error" class="form-text text-danger"></small>   
+    
   </div>
 
 <br>
@@ -87,6 +83,12 @@
   $('#save_offer').click(function(e){
     e.preventDefault();
     console.log('clicked');
+    $('#photo_error').text('');
+    $('#name_ar_error').text('');
+    $('#name_en_error').text('');
+    $('#details_ar_error').text('');
+    $('#details_en_error').text('');
+    $('#price_error').text('');
 
 var formData = new FormData($('#offerForm')[0]);
 
@@ -104,7 +106,11 @@ var formData = new FormData($('#offerForm')[0]);
 
     },
     error:function(reject){
-
+var response = $.parseJSON(reject.responseText);
+      $.each(response.errors,function(key,val){
+        $("#" + key + "_error").text(val[0]);
+      });
+       
     }
   });
   });

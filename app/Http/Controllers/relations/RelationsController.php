@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\relations;
 
 use App\Http\Controllers\Controller;
+use App\models\Doctor;
+use App\models\Hospital;
 use App\models\Phone;
 use App\User;
 use Illuminate\Http\Request;
 
 class RelationsController extends Controller
 {
+    ###### begin one to one relationships methods #########
     public function hasOneRelation(){
 
         // $phones = $user -> phone; //get phone relationships
@@ -60,4 +63,69 @@ class RelationsController extends Controller
     {
         return User::whereDoesntHave('phone')->get();
     }
+
+
+    ####### end one to one  relationships methods ###########
+
+    ######## begin one to many relationships methods ###########
+    public function getHospitalDoctors(){
+         $hospital = Hospital :: find(1); // first method
+        // Hospital::where('id',1) -> first(); // second method
+        // Hospital::  first(); // third method
+         
+        //return $hospital -> doctors -> find(2) -> name;
+     // return  $hospital = Hospital:: with('doctorsd')->find(1);
+
+    //  $doctors = $hospital->doctors;
+    //  foreach($doctors as $doctor){
+    //      echo $doctor -> name .'<br>';
+    //  }
+       
+        $doctor  = Doctor:: find(3);
+        return $doctor -> hospital  -> name;
+
+    }
+
+    public function hospitals(){
+        $hospitals = Hospital:: select('id','name','address') ->get();
+        dd('success');
+        return view('doctors.hospital',compact('hospitals'));
+    }
+
+    public function doctors($hospital_id){
+        $hospital = Hospital::find($hospital_id);
+        $doctors = $hospital -> doctors;
+        return view('doctors.doctor',compact('doctors'));
+
+    }
+
+    public function hospitalsHasDoctors(){
+        return Hospital:: whereHas('doctors') -> get();
+    }
+
+    public function hospitalsHasDoctorsMale()
+    {
+        return Hospital::with('doctors') -> whereHas('doctors',function($q){
+            $q -> where('gender',1);
+        })->get();
+    }
+
+    public function hospitalsNotHaveDotors(){
+        return Hospital:: whereDoesnthave('doctors')-> get();
+    }
+
+    public function deleteDoctors($hospital_id){
+        $hospital = Hospital::find($hospital_id);
+        if(!$hospital){
+            return abort('404');
+        }
+
+        // delete doctors in this hospital
+        $hospital -> doctors() -> delete();
+        // delete hospital
+        $hospital -> delete();
+       return redirect() -> route('hospital.all');
+    }
+
+    ######## end one to many relationships methods ###########
 }

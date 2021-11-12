@@ -19,6 +19,7 @@ class OfferController extends Controller
     }
     public function store(OfferRequest $request)
     {
+       
         //  save  offer into databse  using ajax
         $file_name = $this->saveImage($request->photo, 'images/offers');
 
@@ -32,12 +33,16 @@ class OfferController extends Controller
 
         ]);
         if ($offer) {
+            
             return response()->json([
+                
                 'status' => true,
                 'msg' => __('messages.dataSavedSuccess'),
             ]);
         } else {
+          
             return response()->json([
+                
                 'status' => false,
                 'msg' => __('messages.errorSavedData'),
             ]);
