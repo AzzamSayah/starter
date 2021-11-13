@@ -5,6 +5,7 @@ namespace App\Http\Controllers\relations;
 use App\Http\Controllers\Controller;
 use App\models\Doctor;
 use App\models\Hospital;
+use App\models\Patient;
 use App\models\Phone;
 use App\models\Service;
 use App\User;
@@ -160,7 +161,7 @@ public function getDoctorServicesByDoctorID($doctor_id){
         // $doctor -> services() -> attach($request->service_ids);
         //many to many insertion with delte old data and insertion new data -> update
         // $doctor -> services() -> sync($request->service_ids);
-        //many to many insertion without repitation
+        //many to many insertion without  repitation
         $doctor -> services() -> syncWithoutDetaching($request->service_ids);
        
         return redirect() ->back();
@@ -168,9 +169,17 @@ public function getDoctorServicesByDoctorID($doctor_id){
     
     }
 
+######## end many to many relationships methods ###########
 
 
-    ######## end many to many relationships methods ###########
+
+    ######## begin has one through relationships methods ###########
+public function getPatientDoctor(){
+ $patient = Patient::find(2);
+ return $patient -> doctor;
+}
+
+    ######## end has one through relationships methods ###########
 
 
 

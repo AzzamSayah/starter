@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
  protected $table = "doctors";
- protected $fillable = ['name','title','hospital_id','created_at','updated_at','gender'];
+ protected $fillable = ['name','title','hospital_id','created_at','updated_at','gender','medical_id'];
  protected $hidden = ['created_at', 'updated_at','pivot'];
 
  public function hospital(){

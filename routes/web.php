@@ -189,6 +189,12 @@ Route::get('doctors-services/{doctor_id}', 'relations\RelationsController@getDoc
 
 Route::post('saveServices-to-doctor', 'relations\RelationsController@saveServicesToDoctor')->name('save.doctor.services');
 
-
-
 ############## end many to many relations routes ################
+
+
+
+############## begin has one through relations routes ##############
+Route::get('has-one-through', 'relations\RelationsController@getPatientDoctor');
+
+
+############## end has one through relations routes ##############
