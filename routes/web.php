@@ -196,5 +196,7 @@ Route::post('saveServices-to-doctor', 'relations\RelationsController@saveService
 ############## begin has one through relations routes ##############
 Route::get('has-one-through', 'relations\RelationsController@getPatientDoctor');
 
+Route::get('has-many-through', 'relations\RelationsController@getCountryDoctors');
+
 
 ############## end has one through relations routes ##############
