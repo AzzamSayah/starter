@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\models\Doctor;
 use App\models\Hospital;
 use App\models\Phone;
+use App\models\Service;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -88,7 +89,6 @@ class RelationsController extends Controller
 
     public function hospitals(){
         $hospitals = Hospital:: select('id','name','address') ->get();
-        dd('success');
         return view('doctors.hospital',compact('hospitals'));
     }
 
@@ -128,4 +128,52 @@ class RelationsController extends Controller
     }
 
     ######## end one to many relationships methods ###########
+
+    ######## begin many to many relationships methods ###########
+    public function getDoctorServices(){
+       //  return $doctor -> services;
+       return  $doctor = Doctor::with('services') -> find(1);
+        
+    }
+
+    public function getServiceDoctors(){
+  return $doctors = Service:: with(['doctors' => function($q){
+      $q -> select('doctors.id','name','title');
+  }]) -> find(1);
+    }
+public function getDoctorServicesByDoctorID($doctor_id){
+    $doctor = Doctor::find($doctor_id);
+    $docServices = $doctor -> services;
+
+    $doctors = Doctor:: select('id','name') -> get();
+    $services = Service:: select('id','name') -> get();
+    return view('doctors.services',compact('docServices', 'doctors', 'services'));
+}
+
+
+    public function saveServicesToDoctor(Request $request){
+    $doctor = Doctor::find($request -> doctor_id);
+    if (!$doctor) {
+        return abort('404');
+    } 
+          //many to many insertion with repitation
+        // $doctor -> services() -> attach($request->service_ids);
+        //many to many insertion with delte old data and insertion new data -> update
+        // $doctor -> services() -> sync($request->service_ids);
+        //many to many insertion without repitation
+        $doctor -> services() -> syncWithoutDetaching($request->service_ids);
+       
+        return redirect() ->back();
+    
+    
+    }
+
+
+
+    ######## end many to many relationships methods ###########
+
+
+
+
+
 }

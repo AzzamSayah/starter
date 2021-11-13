@@ -82,7 +82,7 @@
     </div>
   </div>
 </nav>
-<h1>Doctors</h1>
+<h1>Services</h1>
 @if (Session:: has('success'))
     <div class = "alert alert-success">
         {{Session::get('success')}}
@@ -99,31 +99,45 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">name</th>
-        <th scope="col">title</th>
-        <th scope="col">operations</th>
-
-     
+        
     </tr>
 </thead>
 <tbody>
-     @if (isset($doctors) && $doctors -> count() > 0)
-    @foreach ($doctors as $doctor)
+     @if (isset($docServices) && $docServices -> count() > 0)
+    @foreach ($docServices as $docService)
         
  
     <tr>
-        <th scope="row">{{$doctor -> id}}</th>
-        <td>{{$doctor -> name}}</td>
-        <td>{{$doctor -> title}}</td>
+        <th scope="row">{{$docService -> id}}</th>
+        <td>{{$docService -> name}}</td>
         
-        <td><a  href={{route('doctor.services', $doctor -> id)}} class="btn btn-success">show services</button></td>
-
-        <td><a  href={{url('offers/delete/'.$doctor -> id)}} class="btn btn-danger">{{__('messages.delete')}}</button></td>
-       
     </tr>
      @endforeach
       @endif
 </tbody>
 </table>
+<form  method = "POST" action="{{route('save.doctor.services')}}">
+@csrf
+    <div class="form-group">
+    <label for="">select doctor</label>
+    <select class = "form-control" name="doctor_id" >
+        @foreach ($doctors as $doctor)
+        <option value="{{$doctor -> id}}">{{$doctor -> name}}</option>    
+        @endforeach
+        
+    </select>
+</div>
+    <div class="form-group">
+    <label for="">select services</label>
+    <select class = "form-control" name="service_ids[]" multiple >
+        @foreach ($services as $service )
+        <option value="{{$service -> id}}">{{$service -> name}}</option>    
+        @endforeach
+        
+    </select>
+</div>
+<button type="submit" class="btn btn-success">save</button>
+</form>
 
     </body>
 </html>
