@@ -15,6 +15,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+define('PAGINATION_COUNT',3);
+
 Route::get('/', function () {
 
     // $data = [];

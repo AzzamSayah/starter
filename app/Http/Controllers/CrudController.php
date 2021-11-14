@@ -13,6 +13,23 @@ use App\Events\VideoViewer;
 class CrudController extends Controller
 {
     use OfferTrait;
+
+  public function getAllOffers()
+   {
+    //   $offers = Offer::select('id', 'name_' . LaravelLocalization::getCurrentLocale() . ' as name', 'price', 'details_' . LaravelLocalization::getCurrentLocale() . ' as details')->get(); // return collection of all result
+    // return view('offers.all', compact('offers'));
+
+########################### paginate result ######################### 
+   $offers = Offer::select('id', 'name_' . LaravelLocalization::getCurrentLocale() . ' as name', 'price', 'details_' . LaravelLocalization::getCurrentLocale() . ' as details')->paginate(PAGINATION_COUNT); // return collection of all result
+    return view('offers.pagination', compact('offers'));
+
+  }
+
+
+
+
+
+
     public function  getOffers()
 {
   return Offer::select('id','name') -> get();
@@ -53,11 +70,7 @@ $file_name = $this-> saveImage($request -> photo,'images/offers');
      
  }
 
- public function getAllOffers(){
-  $offers = Offer::select('id','name_' . LaravelLocalization::getCurrentLocale() . ' as name','price','details_' . LaravelLocalization::getCurrentLocale() . ' as details') -> get();
-return view('offers.all',compact('offers')) ;
 
-}
 
 public function editOffer($offer_id){
 //Offer:: findOrFail($offer_id);
