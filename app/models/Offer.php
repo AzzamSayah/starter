@@ -33,4 +33,14 @@ class Offer extends Model
      return $query -> where('status',0)-> whereNull('details_ar');
  }
 ###################### end Local scopes ###########################
+
+
+// mutators
+
+public function setNameEnAttribute($val){
+    $this -> attributes['name_en'] = strtoupper($val);
+}
+
+
+
 }
