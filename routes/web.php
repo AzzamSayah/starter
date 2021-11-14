@@ -101,6 +101,8 @@ Route::group(['prefix' => 'offers'],function(){
         Route::post('update/{offer_id}', 'CrudController@updateOffer')->name('offers.update');
         
         Route::get('delete/{offer_id}', 'CrudController@deleteOffer')->name('offers.delete');
+
+        Route::get('get-all-inactive-offers', 'CrudController@getAllInactiveOffers');
         
     });
     

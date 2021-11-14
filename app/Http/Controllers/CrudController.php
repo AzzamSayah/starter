@@ -14,6 +14,16 @@ class CrudController extends Controller
 {
     use OfferTrait;
 
+
+public function getAllInactiveOffers(){
+
+ return $inactiveOffers = Offer:: Inactive() -> get(); // get all inactive offers using model scope
+
+  //return $inactiveOffers = Offer:: Invalid() -> get(); // get all invalid offers using model scope
+}
+
+
+
   public function getAllOffers()
    {
     //   $offers = Offer::select('id', 'name_' . LaravelLocalization::getCurrentLocale() . ' as name', 'price', 'details_' . LaravelLocalization::getCurrentLocale() . ' as details')->get(); // return collection of all result
