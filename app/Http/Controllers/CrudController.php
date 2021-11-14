@@ -10,6 +10,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Traits\OfferTrait;
 use App\models\Video;
 use App\Events\VideoViewer;
+use App\scopes\OfferScope;
 class CrudController extends Controller
 {
     use OfferTrait;
@@ -17,9 +18,16 @@ class CrudController extends Controller
 
 public function getAllInactiveOffers(){
 
- return $inactiveOffers = Offer:: Inactive() -> get(); // get all inactive offers using model scope
+ //return $inactiveOffers = Offer:: Inactive() -> get(); // get all inactive offers using model scope
 
   //return $inactiveOffers = Offer:: Invalid() -> get(); // get all invalid offers using model scope
+
+  // this result related with global scope
+ // return $inactiveOffers = Offer:: get(); 
+
+  // how to remove global scope
+   return $offer =  Offer:: withoutGlobalScope(OfferScope::class) -> get();
+
 }
 
 

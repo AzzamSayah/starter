@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\scopes\OfferScope;
 
 class Offer extends Model
 {
@@ -10,6 +11,18 @@ class Offer extends Model
  protected $fillable = ['name_ar','name_en','price','details_ar','details_en','photo','created_at','updated_at','status'];
  protected $hidden = ['created_at','updated_at'];
  public $timestamps = false;
+
+
+ // register global scope
+ protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OfferScope);
+    }
+
+
+
 
 ##################### Local scopes #########################
  public function scopeInactive($query){
